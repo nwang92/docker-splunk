@@ -11,3 +11,7 @@ steps:
   # Run tests
   - name: "ci-runner"
     args: [ "pytest", "-sv", "tests/test_debian_9.py::TestDebian9::test_splunk_entrypoint_help" ]
+
+  # Run tests
+  - name: "ci-runner"
+    args: [ "ls", "-a" ]
