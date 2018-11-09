@@ -1,12 +1,12 @@
 steps:
   # Provision CI runner
-  - name: 'gcr.io/cloud-builders/docker'
-    args: ['build', '-f', 'Dockerfile.ci-runner', '-t', 'ci-runner', '.']
-    dir: 'tests'
+  - name: "gcr.io/cloud-builders/docker"
+    args: [ "build", "-f", "Dockerfile.ci-runner", "-t", "ci-runner", "." ]
+    dir: "tests"
 
   # Pull splunk-ansible
   - name: "ci-runner"
-    args: [ "clone", "https://github.com/splunk/splunk-ansible.git", "--branch", "master" ]
+    args: [ "git", "clone", "https://github.com/splunk/splunk-ansible.git", "--branch", "master" ]
     
   # Run tests
   - name: "ci-runner"
