@@ -1,26 +1,17 @@
 steps:
-  # Notify pending
-  - name: 'gcr.io/cloud-builders/gcloud'
-    args: [
-            'beta',
-            'functions',
-            'call','gcp-cicd-set-pending',
-            '--data={"commit_sha":"$COMMIT_SHA", "logUrl":"https://console.cloud.google.com/gcr/builds/$BUILD_ID"}'
-          ]
-
-  # Pull splunk-ansible
-  - name: 'gcr.io/cloud-builders/git'
-    args: ['clone', 'https://github.com/splunk/splunk-ansible.git',  '--branch', 'master']
-    
   # Provision CI runner
   - name: 'gcr.io/cloud-builders/docker'
     args: ['build', '-f', 'Dockerfile.ci-runner', '-t', 'ci-runner', '.']
     dir: 'tests'
 
+  # Pull splunk-ansible
+  - name: "ci-runner"
+    args: [ "clone", "https://github.com/splunk/splunk-ansible.git", "--branch", "master" ]
+    
   # Run tests
   - name: "ci-runner"
     args: [ "pytest", "-sv", "tests/test_debian_9.py::TestDebian9::test_splunk_entrypoint_help" ]
 
-  # Run tests
+  # Build Splunk image
   - name: "ci-runner"
-    args: [ "ls", "-a" ]
+    args: [ "make", "splunk-debian-9" ]
