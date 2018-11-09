@@ -1,4 +1,13 @@
 steps:
+  # Notify pending
+  - name: 'gcr.io/cloud-builders/gcloud'
+    args: [
+            'beta',
+            'functions',
+            'call','gcp-cicd-set-pending',
+            '--data={"commit_sha":"$COMMIT_SHA", "logUrl":"https://console.cloud.google.com/gcr/builds/$BUILD_ID"}'
+          ]
+
   # Pull splunk-ansible
   - name: 'gcr.io/cloud-builders/git'
     args: ['clone', 'https://github.com/splunk/splunk-ansible.git',  '--branch', 'master']
