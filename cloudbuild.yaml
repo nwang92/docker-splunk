@@ -3,8 +3,13 @@ steps:
   # Provision CI runner
   - name: "gcr.io/cloud-builders/docker"
     args: [ "ps", "-a" ]
-    dir: "tests"
 
+  # Provision CI runner
+  - name: "gcr.io/cloud-builders/docker"
+    args: [ "version" ]
+
+  - name: "gcr.io/cloud-builders/docker"
+    args: [ "info" ]
 
   # Provision CI runner
   - name: "gcr.io/cloud-builders/docker"
