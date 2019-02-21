@@ -8,6 +8,10 @@ steps:
   - name: "ci-runner"
     args: [ "printenv" ]
 
+  # Debug
+  - name: "ci-runner"
+    args: [ "ls", "-ltrah", "/" ]
+
   # Pull splunk-ansible
   - name: "ci-runner"
     args: [ "git", "clone", "https://github.com/splunk/splunk-ansible.git", "--branch", "master" ]
