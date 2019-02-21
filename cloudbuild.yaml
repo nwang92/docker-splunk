@@ -4,6 +4,10 @@ steps:
     args: [ "build", "-f", "Dockerfile.ci-runner", "-t", "ci-runner", "." ]
     dir: "tests"
 
+  # Debug
+  - name: "ci-runner"
+    args: [ "printenv" ]
+
   # Pull splunk-ansible
   - name: "ci-runner"
     args: [ "git", "clone", "https://github.com/splunk/splunk-ansible.git", "--branch", "master" ]
