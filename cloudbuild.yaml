@@ -1,4 +1,11 @@
 steps:
+
+  # Provision CI runner
+  - name: "gcr.io/cloud-builders/docker"
+    args: [ "ps", "-a" ]
+    dir: "tests"
+
+
   # Provision CI runner
   - name: "gcr.io/cloud-builders/docker"
     args: [ "build", "-f", "Dockerfile.ci-runner", "-t", "ci-runner", "." ]
